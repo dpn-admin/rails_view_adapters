@@ -43,4 +43,5 @@ module RailsViewAdapters
       self
     end
   end
+
 end

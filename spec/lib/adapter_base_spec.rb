@@ -3,6 +3,7 @@ require "spec_helper"
 require "active_record_helper"
 
 module RailsViewAdapters
+
   describe AdapterBase do
     class TestAdapter < AdapterBase
       def self.simple_maps
@@ -130,4 +131,5 @@ module RailsViewAdapters
       end
     end
   end
+
 end

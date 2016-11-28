@@ -5,6 +5,7 @@
 # See LICENSE.md for details.
 
 module Matchers
+
   class FuzzyNestedMatcher
     def initialize(expected)
       @expected = expected
@@ -87,8 +88,8 @@ module Matchers
     def failure_message
       @errors
     end
-
   end
+
 end
 
 def fuzzy_nested_match(actual)

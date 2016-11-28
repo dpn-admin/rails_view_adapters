@@ -176,6 +176,6 @@ module RailsViewAdapters
       return false if value == false || value =~ /^(false|f|no|n|0)$/i
       raise ArgumentError, "invalid value for boolean: \"#{value}\""
     end
-
   end
+
 end

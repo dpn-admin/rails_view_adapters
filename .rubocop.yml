@@ -8,4 +8,11 @@ Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
 
+Style/EmptyLinesAroundClassBody:
+  Enabled: true
+  EnforcedStyle: no_empty_lines
+
+Style/EmptyLinesAroundModuleBody:
+  Enabled: true
+  EnforcedStyle: empty_lines
 

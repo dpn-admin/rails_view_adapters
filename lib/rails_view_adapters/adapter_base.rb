@@ -96,6 +96,6 @@ module RailsViewAdapters
         end
       end
     end
-
   end
+
 end

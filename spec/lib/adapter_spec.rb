@@ -2,6 +2,7 @@
 require "spec_helper"
 
 module RailsViewAdapters
+
   describe Adapter do
     describe "::define" do
       it "defines a new class" do
@@ -42,4 +43,5 @@ module RailsViewAdapters
       end
     end
   end
+
 end
