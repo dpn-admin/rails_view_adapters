@@ -4,3 +4,8 @@ AllCops:
   DisplayCopNames: true
   TargetRubyVersion: 2.3
 
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+
