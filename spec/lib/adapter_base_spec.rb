@@ -11,11 +11,11 @@ module RailsViewAdapters
       end
 
       def self.to_maps
-        [[:user_id, proc {|v| { user_name: v + 10 } }]]
+        [[:user_id, proc { |v| { user_name: v + 10 } }]]
       end
 
       def self.from_maps
-        [[:user_name, proc {|v| { user_id: v + 100 } }]]
+        [[:user_name, proc { |v| { user_id: v + 100 } }]]
       end
 
       def self.model_fields
@@ -29,11 +29,11 @@ module RailsViewAdapters
 
     class ARTestAdapter < TestAdapter
       def self.to_maps
-        [[:user_id, proc {|v| { user_name: User.find(v).name } }]]
+        [[:user_id, proc { |v| { user_name: User.find(v).name } }]]
       end
 
       def self.from_maps
-        [[:user_name, proc {|v| { user_id: User.find_by_name(v).id } }]]
+        [[:user_name, proc { |v| { user_id: User.find_by_name(v).id } }]]
       end
     end
 

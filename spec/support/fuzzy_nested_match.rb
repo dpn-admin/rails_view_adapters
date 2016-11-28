@@ -28,8 +28,8 @@ module Matchers
 
     def match_hashes(actual, expected)
       unless actual.keys.sort == expected.keys.sort
-        extra = (actual.keys - expected.keys).map {|key| "+#{key}" }
-        missing = (expected.keys - actual.keys).map {|key| "-#{key}" }
+        extra = (actual.keys - expected.keys).map { |key| "+#{key}" }
+        missing = (expected.keys - actual.keys).map { |key| "-#{key}" }
         return { "Hash keys mismatch:" => extra + missing }
       end
 

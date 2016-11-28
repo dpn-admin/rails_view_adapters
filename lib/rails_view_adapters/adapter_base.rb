@@ -50,7 +50,7 @@ module RailsViewAdapters
     end
 
     def to_params_hash
-      @params_hash ||= to_model_hash.merge(@extras.symbolize_keys) {|_key, lhs, _rhs| lhs }
+      @params_hash ||= to_model_hash.merge(@extras.symbolize_keys) { |_key, lhs, _rhs| lhs }
     end
 
     def to_json(options = {})

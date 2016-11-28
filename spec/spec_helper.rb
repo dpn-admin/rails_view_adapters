@@ -25,6 +25,6 @@ RSpec.configure do |config|
 end
 
 require "rails_view_adapters"
-Dir[File.join(File.dirname(__FILE__), "support", "**", "*.rb")].each {|f| require f }
+Dir[File.join(File.dirname(__FILE__), "support", "**", "*.rb")].each { |f| require f }
 
 Time.zone = "UTC"

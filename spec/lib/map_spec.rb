@@ -67,7 +67,7 @@ module RailsViewAdapters
 
     describe "#add_to_map" do
       let(:model_field) { :mod }
-      let(:process) { proc {|v| v + 37 } }
+      let(:process) { proc { |v| v + 37 } }
       it "adds the mapping" do
         map.add_to_map(model_field, &process)
         expect(map.to_hash).to eql(bare_hash.merge(
@@ -82,7 +82,7 @@ module RailsViewAdapters
 
     describe "#add_from_map" do
       let(:public_field) { :pub }
-      let(:process) { proc {|v| v + 37 } }
+      let(:process) { proc { |v| v + 37 } }
       it "adds the mapping" do
         map.add_from_map(public_field, &process)
         expect(map.to_hash).to eql(bare_hash.merge(

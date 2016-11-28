@@ -44,7 +44,7 @@ module RailsViewAdapters
     describe "#map_to_public" do
       let(:model_field) { :mod }
       let(:extra_fields) { [:one, :two] }
-      let(:process) { proc {|v| { one: v + 1, two: v + 2 } } }
+      let(:process) { proc { |v| { one: v + 1, two: v + 2 } } }
       it "creates the correct mapping" do
         proxy.map_to_public(model_field, extra_fields, &process)
         expect(proxy.map.to_hash).to eql(bare_hash.merge(
@@ -57,7 +57,7 @@ module RailsViewAdapters
 
     describe "#map_from_public" do
       let(:public_field) { :pub }
-      let(:process) { proc {|v| { one: v + 1, two: v + 2 } } }
+      let(:process) { proc { |v| { one: v + 1, two: v + 2 } } }
       it "creates the correct mapping" do
         proxy.map_from_public(public_field, &process)
         expect(proxy.map.to_hash).to eql(bare_hash.merge(

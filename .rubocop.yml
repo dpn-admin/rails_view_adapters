@@ -16,3 +16,7 @@ Style/EmptyLinesAroundModuleBody:
   Enabled: true
   EnforcedStyle: empty_lines
 
+Style/SpaceInsideBlockBraces:
+  Enabled: true
+  EnforcedStyle: space
+
