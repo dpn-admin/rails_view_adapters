@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require "active_support/time_with_zone"
+require 'active_support/time_with_zone'
 
 module RailsViewAdapters
-
   # Defines the DSL methods that are used to modify the underlying
   # map.  This class is only used to evaluate the DSL calls, thereby
   # modifying the Map.
@@ -53,7 +52,7 @@ module RailsViewAdapters
     # returned as-is.  Strings that cannot be parsed with the given
     # date_format string are returned as nil.
     #
-    # If no timezone is provided, utc is assumed.  
+    # If no timezone is provided, utc is assumed.
     # @param [Symbol] model_field
     # @param [Symbol] public_field
     # @param [String] date_format The Date format to use.
@@ -128,8 +127,8 @@ module RailsViewAdapters
           result = { model_field => model_class.where(sub_method => value) }
           public_field_size = value.respond_to?(:size) ? value.size : 0
           result[model_field] = result[model_field]
-            .to_a
-            .fill(nil, result[model_field].size, public_field_size - result[model_field].size)
+                                .to_a
+                                .fill(nil, result[model_field].size, public_field_size - result[model_field].size)
           result
         end
       end
@@ -154,15 +153,15 @@ module RailsViewAdapters
     def parts_to_time(parts)
       return nil if parts.empty?
       begin
-      time = Time.new(
-        parts.fetch(:year),
-        parts.fetch(:mon),
-        parts.fetch(:mday),
-        parts.fetch(:hour),
-        parts.fetch(:min),
-        parts.fetch(:sec) + parts.fetch(:sec_fraction, 0),
-        parts.fetch(:offset, 0)
-      )
+        time = Time.new(
+          parts.fetch(:year),
+          parts.fetch(:mon),
+          parts.fetch(:mday),
+          parts.fetch(:hour),
+          parts.fetch(:min),
+          parts.fetch(:sec) + parts.fetch(:sec_fraction, 0),
+          parts.fetch(:offset, 0)
+        )
       rescue KeyError
         return nil
       end
@@ -176,6 +175,5 @@ module RailsViewAdapters
       return false if value == false || value =~ /^(false|f|no|n|0)$/i
       raise ArgumentError, "invalid value for boolean: \"#{value}\""
     end
-
   end
 end

@@ -1,13 +1,11 @@
 # frozen_string_literal: true
-require "rails_view_adapters/definition_proxy"
-require "rails_view_adapters/map"
-require "rails_view_adapters/adapter_base"
+require 'rails_view_adapters/definition_proxy'
+require 'rails_view_adapters/map'
+require 'rails_view_adapters/adapter_base'
 
 module RailsViewAdapters
-
   # Top level namespace for defining the adapters.
   module Adapter
-
     FIELDS = [
       :model_fields, :public_fields,
       :to_maps, :from_maps, :simple_maps
@@ -28,7 +26,5 @@ module RailsViewAdapters
         end
       end
     end
-
   end
-
 end

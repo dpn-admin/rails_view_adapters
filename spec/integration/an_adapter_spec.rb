@@ -1,11 +1,10 @@
 # frozen_string_literal: true
-require "active_record_helper"
-require "spec_helper"
+require 'active_record_helper'
+require 'spec_helper'
 
 module RailsViewAdapters
-
-  describe "an adapter", integration: true do
-    date_format = "%Y-%m-%dT%H:%M:%S%z"
+  describe 'an adapter', integration: true do
+    date_format = '%Y-%m-%dT%H:%M:%S%z'
     secret_token = Faker::Internet.password
     Adapter.define(:user_integration_test_adapter) do
       map_simple :name, :author
@@ -47,12 +46,11 @@ module RailsViewAdapters
       }
     end
 
-    it_behaves_like "an adapter", secret: secret_token do
+    it_behaves_like 'an adapter', secret: secret_token do
       let(:adapter_class) { UserIntegrationTestAdapter }
       let(:model)         { @model }
       let(:public_hash)   { @public_hash }
       let(:model_hash)    { @model_hash }
     end
   end
-
 end

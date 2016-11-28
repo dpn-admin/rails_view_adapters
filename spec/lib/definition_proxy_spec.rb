@@ -1,9 +1,8 @@
 # frozen_string_literal: true
-require "spec_helper"
-require "active_record_helper"
+require 'spec_helper'
+require 'active_record_helper'
 
 module RailsViewAdapters
-
   class TestMap < Map
     def to_hash
       {
@@ -28,78 +27,78 @@ module RailsViewAdapters
       }
     end
 
-    describe "#map_simple" do
+    describe '#map_simple' do
       let(:model_field) { :mod }
       let(:public_field) { :pub }
-      it "creates the correct mapping" do
+      it 'creates the correct mapping' do
         proxy.map_simple(model_field, public_field)
         expect(proxy.map.to_hash).to eql(bare_hash.merge(
-          public_fields: [public_field],
-          model_fields: [model_field],
-          simple_maps: [[model_field, public_field]]
+                                           public_fields: [public_field],
+                                           model_fields: [model_field],
+                                           simple_maps: [[model_field, public_field]]
         ))
       end
     end
 
-    describe "#map_to_public" do
+    describe '#map_to_public' do
       let(:model_field) { :mod }
       let(:extra_fields) { [:one, :two] }
-      let(:process) { proc {|v| { one: v + 1, two: v + 2 } } }
-      it "creates the correct mapping" do
+      let(:process) { proc { |v| { one: v + 1, two: v + 2 } } }
+      it 'creates the correct mapping' do
         proxy.map_to_public(model_field, extra_fields, &process)
         expect(proxy.map.to_hash).to eql(bare_hash.merge(
-          to_maps: [[model_field, process]],
-          public_fields: extra_fields,
-          model_fields: [model_field]
+                                           to_maps: [[model_field, process]],
+                                           public_fields: extra_fields,
+                                           model_fields: [model_field]
         ))
       end
     end
 
-    describe "#map_from_public" do
+    describe '#map_from_public' do
       let(:public_field) { :pub }
-      let(:process) { proc {|v| { one: v + 1, two: v + 2 } } }
-      it "creates the correct mapping" do
+      let(:process) { proc { |v| { one: v + 1, two: v + 2 } } }
+      it 'creates the correct mapping' do
         proxy.map_from_public(public_field, &process)
         expect(proxy.map.to_hash).to eql(bare_hash.merge(
-          from_maps: [[public_field, process]],
-          public_fields: [public_field]
+                                           from_maps: [[public_field, process]],
+                                           public_fields: [public_field]
         ))
       end
     end
 
-    describe "#hidden_field" do
+    describe '#hidden_field' do
       let(:hidden_field) { :hidden }
-      it "adds a model_field" do
+      it 'adds a model_field' do
         proxy.hidden_field(hidden_field)
         expect(proxy.map.to_hash).to eql(bare_hash.merge(
-          model_fields: [hidden_field]
+                                           model_fields: [hidden_field]
         ))
       end
     end
 
-    describe "#map_date" do
+    describe '#map_date' do
       let(:model_field) { :mod }
       let(:public_field) { :pub }
-      let(:date_format) { "%Y-%m-%dT%H:%M:%SZ" }
-      let(:time) { Time.utc(2012, 6, 10, 13, 07, 33) }
-      let(:time_string) { "2012-06-10T13:07:33Z" }
-      it "creates the correct model_fields" do
+      let(:date_format) { '%Y-%m-%dT%H:%M:%SZ' }
+      let(:time) { Time.utc(2012, 6, 10, 13, 0o7, 33) }
+      let(:time_string) { '2012-06-10T13:07:33Z' }
+      it 'creates the correct model_fields' do
         proxy.map_date(model_field, public_field, date_format)
         expect(proxy.map.model_fields).to eql([model_field])
       end
-      it "creates the correct public_fields" do
+      it 'creates the correct public_fields' do
         proxy.map_date(model_field, public_field, date_format)
         expect(proxy.map.public_fields).to eql([public_field])
       end
-      it "creates no simple_maps" do
+      it 'creates no simple_maps' do
         proxy.map_date(model_field, public_field, date_format)
         expect(proxy.map.simple_maps).to eql([])
       end
-      it "creates the correct to_maps" do
+      it 'creates the correct to_maps' do
         proxy.map_date(model_field, public_field, date_format)
         expect(proxy.map.to_maps[0]).to contain_exactly(model_field, an_instance_of(Proc))
       end
-      it "creates the correct from_maps" do
+      it 'creates the correct from_maps' do
         proxy.map_date(model_field, public_field, date_format)
         expect(proxy.map.from_maps[0]).to contain_exactly(public_field, an_instance_of(Proc))
       end
@@ -111,29 +110,29 @@ module RailsViewAdapters
         proxy.map_date(model_field, public_field, date_format)
         expect(proxy.map.from_maps[0][1].call(time_string)).to eql(model_field => time)
       end
-      it "raises ArgumentError if date_format is nil" do
+      it 'raises ArgumentError if date_format is nil' do
         expect do
           proxy.map_date(model_field, public_field, nil)
         end.to raise_error ArgumentError
       end
     end
 
-    describe "#map_bool" do
+    describe '#map_bool' do
       let(:model_field) { :mod }
       let(:public_field) { :pub }
-      it "creates the correct model_fields" do
+      it 'creates the correct model_fields' do
         proxy.map_bool(model_field, public_field)
         expect(proxy.map.model_fields).to eql([model_field])
       end
-      it "creates the correct public_fields" do
+      it 'creates the correct public_fields' do
         proxy.map_bool(model_field, public_field)
         expect(proxy.map.public_fields).to eql([public_field])
       end
-      it "creates the correct to_maps" do
+      it 'creates the correct to_maps' do
         proxy.map_bool(model_field, public_field)
         expect(proxy.map.to_maps[0]).to contain_exactly(model_field, an_instance_of(Proc))
       end
-      it "creates the correct from_maps" do
+      it 'creates the correct from_maps' do
         proxy.map_bool(model_field, public_field)
         expect(proxy.map.from_maps[0]).to contain_exactly(public_field, an_instance_of(Proc))
       end
@@ -143,19 +142,19 @@ module RailsViewAdapters
           expect(proxy.map.to_maps[0][1].call(bool)).to eql(public_field => bool)
         end
       end
-      ["true", "True", "t", "T", "yes", "Yes", "Y", "y", "1"].each do |truthy_string|
+      %w(true True t T yes Yes Y y 1).each do |truthy_string|
         it "defines a from_map that converts public #{truthy_string} to model true" do
           proxy.map_bool(model_field, public_field)
           expect(proxy.map.from_maps[0][1].call(truthy_string)).to eql(model_field => true)
         end
       end
-      ["false", "False", "f", "F", "no", "No", "N", "n", "0"].each do |falsey_string|
+      %w(false False f F no No N n 0).each do |falsey_string|
         it "defines a from_map that converts public #{falsey_string} to model false" do
           proxy.map_bool(model_field, public_field)
           expect(proxy.map.from_maps[0][1].call(falsey_string)).to eql(model_field => false)
         end
       end
-      [nil, "nil", "null"].each do |null|
+      [nil, 'nil', 'null'].each do |null|
         it "defines a from_map that converts public #{null} to model nil" do
           proxy.map_bool(model_field, public_field)
           expect(proxy.map.from_maps[0][1].call(null)).to eql(model_field => nil)
@@ -163,28 +162,28 @@ module RailsViewAdapters
       end
     end
 
-    describe "#map_belongs_to" do
+    describe '#map_belongs_to' do
       let(:model_field) { :user_id }
       let(:public_field) { :user_name }
       let(:options) { { model_class: User, sub_method: :name } }
       let(:post) { Fabricate(:post, user: Fabricate(:user)) }
-      it "creates the correct model_fields" do
+      it 'creates the correct model_fields' do
         proxy.map_belongs_to(model_field, public_field, options)
         expect(proxy.map.model_fields).to contain_exactly(model_field)
       end
-      it "creates the correct public_fields" do
+      it 'creates the correct public_fields' do
         proxy.map_belongs_to(model_field, public_field, options)
         expect(proxy.map.public_fields).to contain_exactly(public_field)
       end
-      it "creates no simple_maps" do
+      it 'creates no simple_maps' do
         proxy.map_belongs_to(model_field, public_field, options)
         expect(proxy.map.simple_maps).to eql([])
       end
-      it "creates the correct to_maps" do
+      it 'creates the correct to_maps' do
         proxy.map_belongs_to(model_field, public_field, options)
         expect(proxy.map.to_maps[0]).to contain_exactly(model_field, an_instance_of(Proc))
       end
-      it "creates the correct from_maps" do
+      it 'creates the correct from_maps' do
         proxy.map_belongs_to(model_field, public_field, options)
         expect(proxy.map.from_maps[0]).to contain_exactly(public_field, an_instance_of(Proc))
       end
@@ -200,29 +199,29 @@ module RailsViewAdapters
       end
     end
 
-    describe "#map_has_many" do
+    describe '#map_has_many' do
       let(:model_field) { :posts }
       let(:public_field) { :post_dates }
       let(:options) { { model_class: Post, sub_method: :created_at } }
       let(:user) { Fabricate(:user) }
       before(:each) { Fabricate.times(2, :post, user: user) }
-      it "creates the correct model_fields" do
+      it 'creates the correct model_fields' do
         proxy.map_has_many(model_field, public_field, options)
         expect(proxy.map.model_fields).to contain_exactly(model_field)
       end
-      it "creates the correct public_fields" do
+      it 'creates the correct public_fields' do
         proxy.map_has_many(model_field, public_field, options)
         expect(proxy.map.public_fields).to contain_exactly(public_field)
       end
-      it "creates no simple_maps" do
+      it 'creates no simple_maps' do
         proxy.map_has_many(model_field, public_field, options)
         expect(proxy.map.simple_maps).to eql([])
       end
-      it "creates the correct to_maps" do
+      it 'creates the correct to_maps' do
         proxy.map_has_many(model_field, public_field, options)
         expect(proxy.map.to_maps[0]).to contain_exactly(model_field, an_instance_of(Proc))
       end
-      it "creates the correct from_maps" do
+      it 'creates the correct from_maps' do
         proxy.map_has_many(model_field, public_field, options)
         expect(proxy.map.from_maps[0]).to contain_exactly(public_field, an_instance_of(Proc))
       end
@@ -238,5 +237,4 @@ module RailsViewAdapters
       end
     end
   end
-
 end

@@ -4,10 +4,9 @@
 # Licensed according to the terms of the Revised BSD License
 # See LICENSE.md for details.
 
-require "active_support/core_ext/hash"
+require 'active_support/core_ext/hash'
 
 module RailsViewAdapters
-
   # Base class on which adapters are defined.
   class AdapterBase
     # Create an instance from an ActiveRecord model.
@@ -50,7 +49,7 @@ module RailsViewAdapters
     end
 
     def to_params_hash
-      @params_hash ||= to_model_hash.merge(@extras.symbolize_keys) {|_key, lhs, _rhs| lhs }
+      @params_hash ||= to_model_hash.merge(@extras.symbolize_keys) { |_key, lhs, _rhs| lhs }
     end
 
     def to_json(options = {})
@@ -96,6 +95,5 @@ module RailsViewAdapters
         end
       end
     end
-
   end
 end

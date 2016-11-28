@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 module RailsViewAdapters
-
   # Contains the information needed by the adapters
   # to convert from one form to another.
   class Map

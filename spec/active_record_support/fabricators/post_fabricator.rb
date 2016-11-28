@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require "faker"
+require 'faker'
 
 Fabricator(:post) do
   body { Faker::Lorem.paragraph }

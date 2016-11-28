@@ -1,8 +1,7 @@
 # frozen_string_literal: true
-require "spec_helper"
+require 'spec_helper'
 
 module RailsViewAdapters
-
   class TestMap < Map
     def to_hash
       {
@@ -27,73 +26,72 @@ module RailsViewAdapters
       }
     end
 
-    describe "#add_model_field" do
+    describe '#add_model_field' do
       let(:model_field) { :test123 }
-      it "adds the model field" do
+      it 'adds the model field' do
         map.add_model_field(model_field)
         expect(map.to_hash).to eql(bare_hash.merge(model_fields: [model_field]))
       end
-      it "returns self" do
+      it 'returns self' do
         expect(map.add_model_field(model_field)).to be(map)
       end
     end
 
-    describe "#add_public_field" do
+    describe '#add_public_field' do
       let(:public_field) { :test123 }
-      it "adds the model field" do
+      it 'adds the model field' do
         map.add_public_field(public_field)
         expect(map.to_hash).to eql(bare_hash.merge(public_fields: [public_field]))
       end
-      it "returns self" do
+      it 'returns self' do
         expect(map.add_public_field(public_field)).to be(map)
       end
     end
 
-    describe "#add_simple_map" do
+    describe '#add_simple_map' do
       let(:public_field) { :pub }
       let(:model_field) { :mod }
-      it "adds the simple mapping" do
+      it 'adds the simple mapping' do
         map.add_simple_map(model_field, public_field)
         expect(map.to_hash).to eql(bare_hash.merge(
-          public_fields: [public_field],
-          model_fields: [model_field],
-          simple_maps: [[model_field, public_field]]
+                                     public_fields: [public_field],
+                                     model_fields: [model_field],
+                                     simple_maps: [[model_field, public_field]]
         ))
       end
-      it "returns self" do
+      it 'returns self' do
         expect(map.add_simple_map(model_field, public_field)).to be(map)
       end
     end
 
-    describe "#add_to_map" do
+    describe '#add_to_map' do
       let(:model_field) { :mod }
-      let(:process) { proc {|v| v + 37 } }
-      it "adds the mapping" do
+      let(:process) { proc { |v| v + 37 } }
+      it 'adds the mapping' do
         map.add_to_map(model_field, &process)
         expect(map.to_hash).to eql(bare_hash.merge(
-          model_fields: [model_field],
-          to_maps: [[model_field, process]]
+                                     model_fields: [model_field],
+                                     to_maps: [[model_field, process]]
         ))
       end
-      it "returns self" do
+      it 'returns self' do
         expect(map.add_to_map(model_field, &process)).to be(map)
       end
     end
 
-    describe "#add_from_map" do
+    describe '#add_from_map' do
       let(:public_field) { :pub }
-      let(:process) { proc {|v| v + 37 } }
-      it "adds the mapping" do
+      let(:process) { proc { |v| v + 37 } }
+      it 'adds the mapping' do
         map.add_from_map(public_field, &process)
         expect(map.to_hash).to eql(bare_hash.merge(
-          public_fields: [public_field],
-          from_maps: [[public_field, process]]
+                                     public_fields: [public_field],
+                                     from_maps: [[public_field, process]]
         ))
       end
-      it "returns self" do
+      it 'returns self' do
         expect(map.add_from_map(public_field, &process)).to be(map)
       end
     end
   end
-
 end

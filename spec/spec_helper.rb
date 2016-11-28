@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require "simplecov"
-require "coveralls"
+require 'simplecov'
+require 'coveralls'
 
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start do
-  add_filter "/.bundle/"
-  add_filter "/spec/"
+  add_filter '/.bundle/'
+  add_filter '/spec/'
 end
 
 RSpec.configure do |config|
@@ -24,7 +24,7 @@ RSpec.configure do |config|
   # Kernel.srand config.seed
 end
 
-require "rails_view_adapters"
-Dir[File.join(File.dirname(__FILE__), "support", "**", "*.rb")].each {|f| require f }
+require 'rails_view_adapters'
+Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each { |f| require f }
 
-Time.zone = "UTC"
+Time.zone = 'UTC'
